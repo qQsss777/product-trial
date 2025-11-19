@@ -1,0 +1,287 @@
+openapi: 3.0.3
+info:
+  title: API Produits
+  description: Spécification OpenAPI simple pour gérer des produits avec un GET (liste), POST (création), et CRUD complet par ID.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000/api
+    description: Serveur local
+
+paths:
+  /products:
+    get:
+      summary: Récupérer tous les produits
+      tags: [Produits]
+      responses:
+        '200':
+          description: Liste de produits
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+
+    post:
+      summary: Créer un produit
+      tags: [Produits]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductCreate'
+      responses:
+        '201':
+          description: Produit créé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: Données invalides
+
+  /products/{productId}:
+    parameters:
+      - name: productId
+        in: path
+        required: true
+        schema:
+          type: integer
+
+    get:
+      summary: Récupérer un produit par ID
+      tags: [Produits]
+      responses:
+        '200':
+          description: Produit trouvé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Produit non trouvé
+
+    put:
+      summary: Mettre à jour un produit (remplacement complet)
+      tags: [Produits]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductUpdate'
+      responses:
+        '200':
+          description: Produit mis à jour
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: Données invalides
+        '404':
+          description: Produit non trouvé
+
+    patch:
+      summary: Modifier partiellement un produit
+      tags: [Produits]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductPatch'
+      responses:
+        '200':
+          description: Produit modifié
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: Données invalides
+        '404':
+          description: Produit non trouvé
+
+    delete:
+      summary: Supprimer un produit
+      tags: [Produits]
+      responses:
+        '204':
+          description: Produit supprimé
+        '404':
+          description: Produit non trouvé
+
+components:
+  schemas:
+
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        image:
+          type: string
+          format: uri
+          nullable: true
+        category:
+          type: string
+          nullable: true
+        price:
+          type: number
+          format: float
+        quantity:
+          type: integer
+        internalReference:
+          type: string
+          nullable: true
+        shellId:
+          type: integer
+          nullable: true
+        inventoryStatus:
+          type: string
+          enum: [INSTOCK, LOWSTOCK, OUTOFSTOCK]
+        rating:
+          type: number
+          format: float
+        createdAt:
+          type: integer
+          description: Timestamp (ms)
+        updatedAt:
+          type: integer
+          description: Timestamp (ms)
+      required:
+        - id
+        - code
+        - name
+        - price
+        - quantity
+        - inventoryStatus
+        - createdAt
+        - updatedAt
+
+    ProductCreate:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        image:
+          type: string
+          format: uri
+          nullable: true
+        category:
+          type: string
+          nullable: true
+        price:
+          type: number
+          format: float
+        quantity:
+          type: integer
+        internalReference:
+          type: string
+          nullable: true
+        shellId:
+          type: integer
+          nullable: true
+        inventoryStatus:
+          type: string
+          enum: [INSTOCK, LOWSTOCK, OUTOFSTOCK]
+        rating:
+          type: number
+          format: float
+      required:
+        - code
+        - name
+        - price
+        - quantity
+        - inventoryStatus
+
+    ProductUpdate:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        image:
+          type: string
+          format: uri
+          nullable: true
+        category:
+          type: string
+          nullable: true
+        price:
+          type: number
+          format: float
+        quantity:
+          type: integer
+        internalReference:
+          type: string
+          nullable: true
+        shellId:
+          type: integer
+          nullable: true
+        inventoryStatus:
+          type: string
+          enum: [INSTOCK, LOWSTOCK, OUTOFSTOCK]
+        rating:
+          type: number
+          format: float
+      required:
+        - code
+        - name
+        - price
+        - quantity
+        - inventoryStatus
+
+    ProductPatch:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        image:
+          type: string
+          format: uri
+          nullable: true
+        category:
+          type: string
+          nullable: true
+        price:
+          type: number
+          format: float
+        quantity:
+          type: integer
+        internalReference:
+          type: string
+          nullable: true
+        shellId:
+          type: integer
+          nullable: true
+        inventoryStatus:
+          type: string
+          enum: [INSTOCK, LOWSTOCK, OUTOFSTOCK]
+        rating:
+          type: number
+          format: float
