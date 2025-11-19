@@ -19,7 +19,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"pnpm --filter ./apps/front start\" \"pnpm --filter ./apps/web dev\""
+    "dev": "concurrently \"pnpm --filter ./apps/front start\" \"pnpm --filter ./apps/back start\" \"pnpm --filter ./apps/docs start\""
   },
   "devDependencies": {
     "concurrently": "^9.2.1"

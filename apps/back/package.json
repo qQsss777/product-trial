@@ -3,13 +3,31 @@
   "version": "1.0.0",
   "description": "product trial",
   "keywords": [
-    "product", "backend"
+    "product",
+    "backend"
   ],
   "license": "ISC",
   "author": "MLM",
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon",
+    "start": "node dist/server.js",
+    "build": "tsc",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "fastify": "^5.6.2"
+  },
+  "devDependencies": {
+    "@types/node": "20.12.12",
+    "@vitest/coverage-v8": "^4.0.10",
+    "nodemon": "^3.1.11",
+    "supertest": "^7.1.4",
+    "tsx": "^4.20.6",
+    "typescript": "5.4.5",
+    "vitest": "^4.0.10"
   }
 }
