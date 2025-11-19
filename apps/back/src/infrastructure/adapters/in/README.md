@@ -1,0 +1,1 @@
+controlleur à injecter dans les routes

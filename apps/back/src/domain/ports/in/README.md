@@ -1,0 +1,1 @@
+interface pas obligatoire mais à faire quand même pour le CRUD
